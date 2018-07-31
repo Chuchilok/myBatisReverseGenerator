@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mv.dao.gen.sessionsMapper" >
+  <resultMap id="BaseResultMap" type="com.mv.entity.sessions" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="mov_id" property="movId" jdbcType="INTEGER" />
+    <result column="screens_id" property="screensId" jdbcType="INTEGER" />
+    <result column="start_time" property="startTime" jdbcType="DATE" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="view" property="view" jdbcType="VARCHAR" />
+    <result column="total_sold" property="totalSold" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, mov_id, screens_id, start_time, price, view, total_sold
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.mv.entity.sessionsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sessions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="pagination != null" >
+      limit #{pagination.begin} , #{pagination.length}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sessions
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sessions
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mv.entity.sessionsExample" >
+    delete from sessions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mv.entity.sessions" >
+    insert into sessions (id, mov_id, screens_id, 
+      start_time, price, view, 
+      total_sold)
+    values (#{id,jdbcType=INTEGER}, #{movId,jdbcType=INTEGER}, #{screensId,jdbcType=INTEGER}, 
+      #{startTime,jdbcType=DATE}, #{price,jdbcType=DECIMAL}, #{view,jdbcType=VARCHAR}, 
+      #{totalSold,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mv.entity.sessions" >
+    insert into sessions
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="movId != null" >
+        mov_id,
+      </if>
+      <if test="screensId != null" >
+        screens_id,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="view != null" >
+        view,
+      </if>
+      <if test="totalSold != null" >
+        total_sold,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="movId != null" >
+        #{movId,jdbcType=INTEGER},
+      </if>
+      <if test="screensId != null" >
+        #{screensId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=DATE},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="view != null" >
+        #{view,jdbcType=VARCHAR},
+      </if>
+      <if test="totalSold != null" >
+        #{totalSold,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mv.entity.sessionsExample" resultType="java.lang.Integer" >
+    select count(*) from sessions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sessions
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.movId != null" >
+        mov_id = #{record.movId,jdbcType=INTEGER},
+      </if>
+      <if test="record.screensId != null" >
+        screens_id = #{record.screensId,jdbcType=INTEGER},
+      </if>
+      <if test="record.startTime != null" >
+        start_time = #{record.startTime,jdbcType=DATE},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.view != null" >
+        view = #{record.view,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalSold != null" >
+        total_sold = #{record.totalSold,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sessions
+    set id = #{record.id,jdbcType=INTEGER},
+      mov_id = #{record.movId,jdbcType=INTEGER},
+      screens_id = #{record.screensId,jdbcType=INTEGER},
+      start_time = #{record.startTime,jdbcType=DATE},
+      price = #{record.price,jdbcType=DECIMAL},
+      view = #{record.view,jdbcType=VARCHAR},
+      total_sold = #{record.totalSold,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mv.entity.sessions" >
+    update sessions
+    <set >
+      <if test="movId != null" >
+        mov_id = #{movId,jdbcType=INTEGER},
+      </if>
+      <if test="screensId != null" >
+        screens_id = #{screensId,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=DATE},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="view != null" >
+        view = #{view,jdbcType=VARCHAR},
+      </if>
+      <if test="totalSold != null" >
+        total_sold = #{totalSold,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mv.entity.sessions" >
+    update sessions
+    set mov_id = #{movId,jdbcType=INTEGER},
+      screens_id = #{screensId,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=DATE},
+      price = #{price,jdbcType=DECIMAL},
+      view = #{view,jdbcType=VARCHAR},
+      total_sold = #{totalSold,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
